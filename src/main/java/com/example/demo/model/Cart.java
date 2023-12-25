@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private int id= -1;
+    private int id = -1;
     private int total_cost;
 
     // Properties
@@ -15,28 +15,30 @@ public class Cart {
         this.items = new ArrayList<>();
         id = Id;
     }
-    public Cart(){};
+
+    public Cart() {
+    };
 
 
     public String getState() {
-        if(items.isEmpty()){
+        if (items.isEmpty()) {
             return "cart is empty !";
         }
-        return "u have "+Integer.toHexString(this.items.size())+" items in the cart";
+        return "u have " + Integer.toHexString(this.items.size()) + " items in the cart";
     }
 
     // Methods
     public boolean addItem(Product x) {
         items.add(x);
-
+        calc_total_cost();
         return false;
     }
 
     public boolean deleteItem(int id) {
-        // Assuming Product has a getId() method
         for (Product product : items) {
-            if (product.getId()== id) {
+            if (product.getId() == id) {
                 items.remove(product); // Remove the product from the list
+                calc_total_cost();
                 return true; // Successfully deleted
             }
         }
@@ -45,21 +47,20 @@ public class Cart {
 
     public void clear() {
         items.clear();
+        calc_total_cost();
     }
 
-    public String getData(String id)
-    {
+    public String getData(String id) {
         StringBuilder data = new StringBuilder();
         data.append(getState());
         int i = 1;
-        for(Product x : items){
+        for (Product x : items) {
             data.append("item number : ").append(Integer.toHexString(i)).append("data is\n");
             data.append(x.toString());
         }
         data.append("these are cart data");
         return String.valueOf(data);
     }
-
 
     public int getId() {
         return id;
@@ -71,5 +72,13 @@ public class Cart {
 
     public void setTotal_cost(int total_cost) {
         this.total_cost = total_cost;
+    }
+
+    public void calc_total_cost() {
+        int temp = 0;
+        for (Product x : items) {
+            temp += x.getPrice();
+        }
+        total_cost = temp;
     }
 }

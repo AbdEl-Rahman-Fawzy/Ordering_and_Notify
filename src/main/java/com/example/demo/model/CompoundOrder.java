@@ -3,18 +3,27 @@ package com.example.demo.model;
 import java.util.List;
 
 public class CompoundOrder extends Order {
-    private List<Order> orders;
+    private List<SimpleOrder> orders;
 
-    public CompoundOrder(String date, double totalCost, Cart cart, List<Order> orders) {
-        super(date, totalCost, cart);
+    public CompoundOrder(int x , String date, double totalCost, Cart cart, List<SimpleOrder> orders) {
+        super(x, date, totalCost, cart);
         this.orders = orders;
     }
 
-    public List<Order> getOrders() {
+    public List<SimpleOrder> getOrders() {
         return orders;
     }
 
-    public void addOrder(Order order) {
+    public void addOrder(SimpleOrder order) {
         orders.add(order);
+    }
+
+    @Override
+    public void calculate_total_cost() {
+        double x = 0 ;
+        for (Order i : orders){
+            x += i.getTotalCost();
+        }
+        this.setTotalCost(x);
     }
 }
