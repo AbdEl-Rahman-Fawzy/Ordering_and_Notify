@@ -5,8 +5,8 @@ import java.util.List;
 public class CompoundOrder extends Order {
     private List<SimpleOrder> orders;
 
-    public CompoundOrder(int x , String date, double totalCost, Cart cart, List<SimpleOrder> orders) {
-        super(x, date, totalCost, cart);
+    public CompoundOrder(int x , String date, Cart cart, List<SimpleOrder> orders) {
+        super(x, date, cart);
         this.orders = orders;
     }
 

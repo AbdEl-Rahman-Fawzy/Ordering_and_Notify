@@ -15,7 +15,7 @@ public class CustomerServiceImpl {
             if(Database.getCustomer(p.getId()) != null){
                 return false;
             }
-            Database.addCustomer(p.getId(), p);
+            Database.addCustomer(p);
         } catch (Exception e) {
             System.out.println("Exception in addPerson as" + e.getMessage());
             return false;

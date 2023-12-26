@@ -1,8 +1,8 @@
 package com.example.demo.model;
 
 public class SimpleOrder extends Order {
-    public SimpleOrder(int x , String date, double totalCost, Cart cart) {
-        super(x, date, totalCost, cart);
+    public SimpleOrder(int x , String date, Cart cart) {
+        super(x, date, cart);
     }
 
     @Override

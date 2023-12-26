@@ -10,7 +10,7 @@ public class Customer {
 	private Queue<notification> notifications = new LinkedList<>();
 	private Cart cart = new Cart();
 	private String mail;
-	private int balance;
+	private double balance;
 
 	public String getName() {
 		return name;
@@ -54,11 +54,11 @@ public class Customer {
 		this.age= i;
 	}
 
-	public int getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 }

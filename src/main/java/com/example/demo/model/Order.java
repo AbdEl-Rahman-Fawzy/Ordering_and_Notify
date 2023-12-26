@@ -4,12 +4,12 @@ public abstract class Order {
     private String date;
     private double totalCost;
     private Cart cart;
+    private int ID;
     private int order_owner;
 
-    public Order(int x ,String date, double totalCost, Cart cart) {
+    public Order(int x ,String date, Cart cart) {
         order_owner = x;
         this.date = date;
-        this.totalCost = totalCost;
         this.cart = cart;
     }
 
@@ -46,6 +46,13 @@ public abstract class Order {
         return date;
     }
 
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 }
 
 

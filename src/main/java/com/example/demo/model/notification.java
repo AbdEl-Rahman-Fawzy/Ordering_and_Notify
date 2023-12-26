@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 public class notification {
-
+    private int ID;
     private int notify_user_id ;
     // Property
     private String content;
@@ -34,4 +34,10 @@ public class notification {
         return notify_user_id;
     }
 
+    public void setID(int generateNotificationId) {
+        ID=generateNotificationId;
+    }
+    public int getID() {
+        return ID;
+    }
 }

@@ -11,13 +11,10 @@ public class Cart {
     private List<Product> items;
 
     // Constructors
-    public Cart(int Id) {
+    public Cart() {
         this.items = new ArrayList<>();
-        id = Id;
     }
 
-    public Cart() {
-    };
 
 
     public String getState() {
@@ -25,6 +22,12 @@ public class Cart {
             return "cart is empty !";
         }
         return "u have " + Integer.toHexString(this.items.size()) + " items in the cart";
+    }
+    public boolean isempty(){
+        if(items.isEmpty()){
+            return true;
+        }
+        return false;
     }
 
     // Methods
@@ -50,7 +53,7 @@ public class Cart {
         calc_total_cost();
     }
 
-    public String getData(String id) {
+    public String getData() {
         StringBuilder data = new StringBuilder();
         data.append(getState());
         int i = 1;
@@ -73,7 +76,9 @@ public class Cart {
     public void setTotal_cost(int total_cost) {
         this.total_cost = total_cost;
     }
-
+    public void setID(int id){
+        this.id=id;
+    }
     public void calc_total_cost() {
         int temp = 0;
         for (Product x : items) {

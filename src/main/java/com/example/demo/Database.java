@@ -1,9 +1,10 @@
 package com.example.demo;
 
 import com.example.demo.model.*;
-
+import java.util.Random;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +18,10 @@ public class Database {
     private static List<String> logs = new ArrayList<>();
 
     // Methods for Customer operations
-    public static void addCustomer(int customerId, Customer customer) {
-        customers.put(customerId, customer);
+    public static void addCustomer(Customer customer) {
+        customer.getCart().setID(generate_hash());
+        customer.setId(generate_hash());
+        customers.put(customer.getId(), customer);
     }
 
     public static void removeCustomer(int customerId) {
@@ -30,8 +33,9 @@ public class Database {
     }
 
     // Methods for Notification operations
-    public static void addNotification(int notificationId, notification notification) {
-        notifications.put(notificationId, notification);
+    public static void addNotification(notification notification) {
+        notification.setID(generate_hash());
+        notifications.put(notification.getID(), notification);
     }
 
     public static void removeNotification(int notificationId) {
@@ -42,8 +46,10 @@ public class Database {
         return notifications.get(notificationId);
     }
     //methods for order
-    public static void addOrder(int id, Order x) {
-        Orders.put(id, x);
+    public static void addOrder(Order x) {
+        x.setID(generate_hash());
+        Orders.put(x.getID(), x);
+
     }
 
     public static void removeOrder(int id) {
@@ -53,8 +59,9 @@ public class Database {
         return Orders.get(id);
     }
     // Methods for Product operations
-    public static void addProduct(int productId, Product product) {
-        products.put(productId, product);
+    public static void addProduct( Product product) {
+        product.setId(generate_hash());
+        products.put(product.getId(), product);
     }
 
     public static void removeProduct(int productId) {
@@ -111,27 +118,24 @@ public class Database {
         System.out.println();
     }
 
-    public static String generateSHA1Hash(int input) {
+    private static int generate_hash() {
+        Random random = new Random();
+        int input=random.nextInt(0,50000);
         try {
             // Use SHA-1 algorithm
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             byte[] hash = digest.digest(String.valueOf(input).getBytes(StandardCharsets.UTF_8));
 
-            // Convert the byte array to a hexadecimal string
-            StringBuilder hexString = new StringBuilder();
+            // Convert the byte array to an integer
+            int result = 0;
             for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
+                result = (result << 8) | (b & 0xFF);
             }
 
-            return hexString.toString();
+            return result;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return null;
+            return 0; // or throw an exception, depending on your requirements
         }
     }
-
 }
