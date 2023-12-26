@@ -7,10 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class OrderService {
-    ///incomplete
     public boolean makeSimple(int user_id){
         try {
-
             if (Database.getCustomer(user_id) == null) {
                 return false;
             }
@@ -18,6 +16,7 @@ public class OrderService {
             Cart x = current.getCart();
             if (current.getBalance() < x.getTotal_cost()) {
                 current.getNotifications().add(NotificationService.getFailureOrder(user_id));
+                return true;
             } else {
                 if(current.getCart().isempty()){
                     current.getNotifications().add(NotificationService.emptyCartOrder(user_id));
@@ -25,17 +24,16 @@ public class OrderService {
                 }
                 String currentDate = getCurrentDate();
                 Order new_ord = new SimpleOrder(current.getId(),currentDate,x);
-                current.setBalance(current.getBalance()-new_ord.getTotalCost());
+                current.setBalance(current.getBalance() - new_ord.getTotalCost());
                 current.getNotifications().add(NotificationService.getOderData(user_id,new_ord.getID()));
                 current.getNotifications().add(NotificationService.getSuccessSimpleOrder(user_id,new_ord.getID()));
 
                 Database.addOrder(new_ord);
                 x.clear();
             }
-
         }
         catch (Exception e){
-            System.out.println("exeption in make order as " + e.getMessage());
+            System.out.println("exception in make order as " + e.getMessage());
         }
         return true;
     }
@@ -45,15 +43,12 @@ public class OrderService {
             for(int i : IDs){
                 makeSimple(i);
             }
-
-
         }
         catch (Exception e){
             System.out.println("exeption in make order as " + e.getMessage());
         }
         return true;
     }
-
 
     public boolean addToCart(int user_id,int productID,int amount) {
         Customer current=Database.getCustomer(user_id);
@@ -65,7 +60,6 @@ public class OrderService {
         }
         else
             return false;
-
     }
 
     public boolean deleteFromCart(int user_id , int productID,int amount) {

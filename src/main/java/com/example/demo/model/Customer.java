@@ -5,12 +5,24 @@ import java.util.Queue;
 
 public class Customer {
 	private String name;
+	private String password;
 	private int age;
 	private int id;
 	private Queue<notification> notifications = new LinkedList<>();
 	private Cart cart = new Cart();
 	private String mail;
 	private double balance;
+
+	public Customer() {}
+
+	public Customer(String name, int age, int id, String mail, double balance, String password) {
+		this.name = name;
+		this.age = age;
+		this.id = id;
+		this.mail = mail;
+		this.balance = balance;
+		this.password = password;
+	}
 
 	public String getName() {
 		return name;
@@ -56,6 +68,13 @@ public class Customer {
 
 	public double getBalance() {
 		return balance;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setBalance(double balance) {
