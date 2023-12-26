@@ -17,17 +17,18 @@ public class OrderService {
             Customer current = Database.getCustomer(user_id);
             Cart x = current.getCart();
             if (current.getBalance() < x.getTotal_cost()) {
-                current.getNotifications().add(NotificationService.getFailerOrder());
+                current.getNotifications().add(NotificationService.getFailureOrder(user_id));
             } else {
                 if(current.getCart().isempty()){
-                    current.getNotifications().add(NotificationService.emptyCartOrder());
+                    current.getNotifications().add(NotificationService.emptyCartOrder(user_id));
                     return true;
                 }
                 String currentDate = getCurrentDate();
                 Order new_ord = new SimpleOrder(current.getId(),currentDate,x);
-                current.getNotifications().add(NotificationService.getOderData());
-                current.getNotifications().add(NotificationService.getSuccessSimpleOrder());
                 current.setBalance(current.getBalance()-new_ord.getTotalCost());
+                current.getNotifications().add(NotificationService.getOderData(user_id,new_ord.getID()));
+                current.getNotifications().add(NotificationService.getSuccessSimpleOrder(user_id,new_ord.getID()));
+
                 Database.addOrder(new_ord);
                 x.clear();
             }

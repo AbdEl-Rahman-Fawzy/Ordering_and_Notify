@@ -6,10 +6,10 @@ public class notification {
     // Property
     private String content;
     private NotificationType type;
-
-    public notification(String content, NotificationType type) {
+    public notification(String content, NotificationType type,int customerID) {
         this.content = content;
         this.type = type;
+        notify_user_id=customerID;
     }
 
     // Constructor
