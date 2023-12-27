@@ -11,7 +11,8 @@ public class Customer {
 	private String password;
 	private int age;
 	private int id;
-	private ArrayList<notification>notifications = new ArrayList<>();
+//	private ArrayList<notification>notifications = new ArrayList<>();
+	private ArrayList<String>notifications = new ArrayList<>();
 	private Cart cart ;
 	private String mail;
 	private double balance;
@@ -61,7 +62,10 @@ public class Customer {
 	}
 
 
-	public ArrayList<notification> getNotifications() {
+//	public ArrayList<notification> getNotifications() {
+//		return notifications;
+//	}
+	public ArrayList<String> getNotifications() {
 		return notifications;
 	}
 
@@ -84,7 +88,10 @@ public class Customer {
 		this.balance = balance;
 	}
 
-	public void add_notification(notification n){
+//	public void add_notification(notification n){
+//		notifications.add(n);
+//	}
+	public void add_notification(String n){
 		notifications.add(n);
 	}
 

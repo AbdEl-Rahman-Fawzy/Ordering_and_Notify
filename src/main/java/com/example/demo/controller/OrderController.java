@@ -19,8 +19,6 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
     private OrderService orderService = new OrderService();
-
-
     // Endpoint to display the catalog products
     @GetMapping("/products")
     public ResponseEntity displayCatalogProducts() {

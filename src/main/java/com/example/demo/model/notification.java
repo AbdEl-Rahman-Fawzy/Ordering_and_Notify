@@ -1,20 +1,16 @@
 package com.example.demo.model;
 
-public class notification {
+public class notification
+{
+    // Property
     private int ID;
     private int notify_user_id ;
-    // Property
     private String content;
     private NotificationType type;
     public notification(String content, NotificationType type,int customerID) {
         this.content = content;
         this.type = type;
         notify_user_id=customerID;
-    }
-
-    // Constructor
-    public notification() {
-        // Default constructor
     }
     public notification(int x) {
         notify_user_id  = x;
