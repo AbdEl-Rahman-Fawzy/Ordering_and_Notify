@@ -2,13 +2,13 @@ package com.example.demo.service;
 
 import com.example.demo.Database;
 import com.example.demo.model.*;
-import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class OrderService {
+    NotificationService n = new NotificationService();
     public boolean makeSimple(int user_id){
         try {
             if (Database.getCustomer(user_id) == null) {
@@ -17,18 +17,18 @@ public class OrderService {
             Customer current = Database.getCustomer(user_id);
             Cart x = current.getCart();
             if (current.getBalance() < x.getTotal_cost()) {
-                current.add_notification(NotificationService.getFailureOrder(user_id));
+                NotificationService.notify_failure_order(user_id);
                 return true;
             } else {
                 if(current.getCart().isempty()){
-                    current.add_notification(NotificationService.emptyCartOrder(user_id));
+                    NotificationService.notify_emtpy_order(user_id);
                     return true;
                 }
                 String currentDate = getCurrentDate();
                 Order new_ord = new SimpleOrder(current.getId(),currentDate,x);
                 current.setBalance(current.getBalance() - new_ord.getTotalCost());
-                current.add_notification(NotificationService.getOderData(user_id,new_ord.getID()));
-                current.add_notification(NotificationService.getSuccessSimpleOrder(user_id,new_ord.getID()));
+                NotificationService.notify_order_data(user_id,new_ord.getID());
+                NotificationService.notify_success_order(user_id,new_ord.getID());
                 Database.addOrder(new_ord);
                 x.clear();
             }
