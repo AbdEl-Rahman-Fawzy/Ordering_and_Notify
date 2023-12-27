@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import com.example.demo.service.NotificationService;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -10,7 +11,7 @@ public class Customer {
 	private String password;
 	private int age;
 	private int id;
-	private Queue<notification> notifications = new LinkedList<>();
+	private ArrayList<notification>notifications = new ArrayList<>();
 	private Cart cart ;
 	private String mail;
 	private double balance;
@@ -60,7 +61,7 @@ public class Customer {
 	}
 
 
-	public Queue<notification> getNotifications() {
+	public ArrayList<notification> getNotifications() {
 		return notifications;
 	}
 
