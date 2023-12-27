@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.service.NotificationService;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -79,6 +81,10 @@ public class Customer {
 
 	public void setBalance(double balance) {
 		this.balance = balance;
+	}
+
+	public void add_notification(notification n){
+		notifications.add(n);
 	}
 
 }

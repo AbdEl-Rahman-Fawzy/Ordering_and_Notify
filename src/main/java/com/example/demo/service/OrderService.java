@@ -17,18 +17,18 @@ public class OrderService {
             Customer current = Database.getCustomer(user_id);
             Cart x = current.getCart();
             if (current.getBalance() < x.getTotal_cost()) {
-                current.getNotifications().add(NotificationService.getFailureOrder(user_id));
+                current.add_notification(NotificationService.getFailureOrder(user_id));
                 return true;
             } else {
                 if(current.getCart().isempty()){
-                    current.getNotifications().add(NotificationService.emptyCartOrder(user_id));
+                    current.add_notification(NotificationService.emptyCartOrder(user_id));
                     return true;
                 }
                 String currentDate = getCurrentDate();
                 Order new_ord = new SimpleOrder(current.getId(),currentDate,x);
                 current.setBalance(current.getBalance() - new_ord.getTotalCost());
-                current.getNotifications().add(NotificationService.getOderData(user_id,new_ord.getID()));
-                current.getNotifications().add(NotificationService.getSuccessSimpleOrder(user_id,new_ord.getID()));
+                current.add_notification(NotificationService.getOderData(user_id,new_ord.getID()));
+                current.add_notification(NotificationService.getSuccessSimpleOrder(user_id,new_ord.getID()));
 
                 Database.addOrder(new_ord);
                 x.clear();
@@ -93,6 +93,7 @@ public class OrderService {
     }
 
     public void clearCart(int user_id) {
-        // Implementation for clear_cart method
+        Customer x = Database.getCustomer(user_id);
+        x.getCart().clear();
     }
 }
