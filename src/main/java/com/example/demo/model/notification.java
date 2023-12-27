@@ -12,10 +12,6 @@ public class notification
         this.type = type;
         notify_user_id=customerID;
     }
-    public notification(int x) {
-        notify_user_id  = x;
-        // Default constructor
-    }
 
     public String getContent() {
         return content;
