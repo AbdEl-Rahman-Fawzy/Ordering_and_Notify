@@ -1,5 +1,18 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = SimpleOrder.class, name = "simple"),
+        @JsonSubTypes.Type(value = CompoundOrder.class, name = "compound")
+})
+
 public abstract class Order {
     private String date;
     private double totalCost;

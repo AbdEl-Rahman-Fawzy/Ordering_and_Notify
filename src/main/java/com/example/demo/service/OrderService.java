@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.Database;
 import com.example.demo.model.*;
+import org.springframework.http.ResponseEntity;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -45,22 +47,25 @@ public class OrderService {
             }
         }
         catch (Exception e){
-            System.out.println("exeption in make order as " + e.getMessage());
+            System.out.println("exception in make order as " + e.getMessage());
         }
         return true;
     }
 
-    public boolean addToCart(int user_id,int productID,int amount) {
-        Customer current=Database.getCustomer(user_id);
-        Product prod=Database.getProduct(productID);
-        if(Catalog.get_product_amount(productID)>=amount) {
-            current.getCart().addItem(prod);
-            Catalog.remove_item(productID,amount);
-            return true;
+    public boolean addToCart(int user_id, int productID, int amount) {
+        Customer current = Database.getCustomer(user_id);
+        Product prod = Catalog.getProductByID(productID);
+
+        if (prod != null) {
+            boolean addedToCart = current.getCart().addItem(prod);
+            if (addedToCart) {
+                Catalog.remove_item(productID, amount);
+                return true;
+            }
         }
-        else
-            return false;
+        return false;
     }
+
 
     public boolean deleteFromCart(int user_id , int productID,int amount) {
         Customer current= Database.getCustomer(user_id);
@@ -90,5 +95,4 @@ public class OrderService {
     public void clearCart(int user_id) {
         // Implementation for clear_cart method
     }
-
 }

@@ -17,7 +17,7 @@ public class Database {
     private static Map<Integer, Order> Orders = new HashMap<>();
     private static List<String> logs = new ArrayList<>();
 
-    public static void init() {
+    public Database() {
         Customer customer1 = new Customer("Hend", 19, 1, "ehend3343@gmail.com", 1000, "pa15oss");
         Customer customer2 = new Customer("Ali", 20, 2, "aa56@mail.com", 2000, "lkk8511");
         Customer customer3 = new Customer("Omar", 21, 3, "oa78@mail.com", 3000, "mbgg2514");
@@ -130,7 +130,7 @@ public class Database {
         System.out.println();
     }
 
-    private static int generate_hash() {
+    public static int generate_hash() {
         Random random = new Random();
         int input=random.nextInt(0,50000);
         try {

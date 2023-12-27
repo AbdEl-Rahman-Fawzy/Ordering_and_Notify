@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
 
     // add a new customer (in case of sign up use case)
+    // added in JSON format
     @PostMapping(value = "/add")
     public ResponseEntity<String> addCustomer(@RequestBody Customer customer) {
         try {
-            Database.init();
             Database.addCustomer(customer);
             System.out.println(customer.getId());
             return ResponseEntity.ok("Customer added Successfully");
@@ -26,7 +26,6 @@ public class CustomerController {
     // Retrieve customer data by id
     @GetMapping("/get/{customerId}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable int customerId) {
-        Database.init();
         Customer customer = Database.getCustomer(customerId);
         if (customer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -38,13 +37,13 @@ public class CustomerController {
     // Customer login with id and password
     @GetMapping(value = "/login/{customerID}/{password}")
     public ResponseEntity<Customer> login(@PathVariable int customerID, @PathVariable String password) {
-        Database.init();
         Customer customer = Database.getCustomer(customerID);
         if (customer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         else {
             if (customer.getPassword().equals(password)) {
+                Database.displayCustomers();
                 return new ResponseEntity<>(customer, HttpStatus.OK);
             }
             else {

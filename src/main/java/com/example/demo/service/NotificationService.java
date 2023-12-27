@@ -19,10 +19,10 @@ public class NotificationService {
     public static notification getOderData(int userID,int orderID) {
         Customer current=Database.getCustomer(userID);
         Order ord=Database.getOrder(orderID);
-        String content = "Dear: " +current.getName() +" your order ID is " + ord.getID()
+        String content = "Dear: " + current.getName() +" your order ID is " + ord.getID()
                 +"order data is \n"
                 + current.getCart().getData();
-        notification notf=new notification(content, NotificationType.INFORMATION,userID);
+        notification notf = new notification(content, NotificationType.INFORMATION,userID);
         Database.addNotification(notf);
         return notf;
     }

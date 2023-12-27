@@ -1,6 +1,19 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.List;
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = SimpleOrder.class, name = "simple"),
+        @JsonSubTypes.Type(value = CompoundOrder.class, name = "compound")
+})
 
 public class CompoundOrder extends Order {
     private List<SimpleOrder> orders;
