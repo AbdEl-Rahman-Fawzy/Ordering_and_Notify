@@ -13,9 +13,9 @@ public class Cart {
     private List<Product> items;
 
     // Constructors
-    public Cart() {
+    public Cart(int id ) {
         this.items = new ArrayList<>();
-        this.id = Database.generate_hash();
+        this.id = id;
     }
 
 

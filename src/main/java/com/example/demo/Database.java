@@ -18,10 +18,10 @@ public class Database {
     private static List<String> logs = new ArrayList<>();
 
     public Database() {
-        Customer customer1 = new Customer("Hend", 19, 1, "ehend3343@gmail.com", 1000, "pa15oss");
-        Customer customer2 = new Customer("Ali", 20, 2, "aa56@mail.com", 2000, "lkk8511");
-        Customer customer3 = new Customer("Omar", 21, 3, "oa78@mail.com", 3000, "mbgg2514");
-        Customer customer4 = new Customer("Soha", 22, 4, "skk69@mail.com", 4000, "kill8511");
+        Customer customer1 = new Customer("Hend", 19, 1, "ehend3343@gmail.com", 1000, "pa15oss",1);
+        Customer customer2 = new Customer("Ali", 20, 2, "aa56@mail.com", 2000, "lkk8511",2);
+        Customer customer3 = new Customer("Omar", 21, 3, "oa78@mail.com", 3000, "mbgg2514",3);
+        Customer customer4 = new Customer("Soha", 22, 4, "skk69@mail.com", 4000, "kill8511",4);
         customers.put(customer1.getId(), customer1);
         customers.put(customer2.getId(), customer2);
         customers.put(customer3.getId(), customer3);

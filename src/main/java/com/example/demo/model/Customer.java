@@ -9,19 +9,20 @@ public class Customer {
 	private int age;
 	private int id;
 	private Queue<notification> notifications = new LinkedList<>();
-	private Cart cart = new Cart();
+	private Cart cart ;
 	private String mail;
 	private double balance;
 
 	public Customer() {}
 
-	public Customer(String name, int age, int id, String mail, double balance, String password) {
+	public Customer(String name, int age, int id, String mail, double balance, String password , int cart_id) {
 		this.name = name;
 		this.age = age;
 		this.id = id;
 		this.mail = mail;
 		this.balance = balance;
 		this.password = password;
+		cart = new Cart(cart_id);
 	}
 
 	public String getName() {
@@ -61,7 +62,6 @@ public class Customer {
 		return notifications;
 	}
 
-
 	public void setAge(int i) {
 		this.age= i;
 	}
@@ -80,4 +80,5 @@ public class Customer {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
+
 }
