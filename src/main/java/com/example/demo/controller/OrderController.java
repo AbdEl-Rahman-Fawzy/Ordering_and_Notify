@@ -1,13 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.Database;
-import com.example.demo.model.Customer;
-import com.example.demo.model.Order;
-import com.example.demo.model.Product;
-import com.example.demo.service.Catalog;
+import com.example.demo.model.*;
+import com.example.demo.Catalog;
 import com.example.demo.service.OrderService;
-import com.fasterxml.jackson.annotation.JacksonAnnotation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +62,8 @@ public class OrderController {
 
             if (orderPlaced) {
                 return ResponseEntity.ok("Simple order placed successfully");
-            } else {
+            }
+            else {
                 return ResponseEntity.badRequest().body("Failed to place the order");
             }
         } catch (Exception e) {

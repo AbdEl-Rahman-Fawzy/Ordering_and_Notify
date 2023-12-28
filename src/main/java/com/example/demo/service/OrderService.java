@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.Catalog;
 import com.example.demo.Database;
 import com.example.demo.model.*;
 
@@ -17,18 +18,18 @@ public class OrderService {
             Customer current = Database.getCustomer(user_id);
             Cart x = current.getCart();
             if (current.getBalance() < x.getTotal_cost()) {
-                NotificationService.notify_failure_order(user_id);
+                n.notify_failure_order(user_id);
                 return true;
             } else {
                 if(current.getCart().isempty()){
-                    NotificationService.notify_emtpy_order(user_id);
+                    n.notify_emtpy_order(user_id);
                     return true;
                 }
                 String currentDate = getCurrentDate();
                 Order new_ord = new SimpleOrder(current.getId(),currentDate,x);
                 current.setBalance(current.getBalance() - new_ord.getTotalCost());
-                NotificationService.notify_order_data(user_id,new_ord.getID());
-                NotificationService.notify_success_order(user_id,new_ord.getID());
+                n.notify_order_data(user_id,new_ord.getID());
+                n.notify_success_order(user_id,new_ord.getID());
                 Database.addOrder(new_ord);
                 x.clear();
             }
@@ -57,6 +58,7 @@ public class OrderService {
 
         if (prod != null) {
             boolean addedToCart = current.getCart().addItem(prod);
+
             if (addedToCart) {
                 Catalog.remove_item(productID, amount);
                 return true;

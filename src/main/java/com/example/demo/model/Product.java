@@ -2,7 +2,7 @@ package com.example.demo.model;
 public class Product {
 
     // Properties
-    private int id; // New field for id
+    private int id;
     private String name;
     private String serialNumber;
     private String vendor;

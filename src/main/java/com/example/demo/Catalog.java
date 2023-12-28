@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo;
 
 import com.example.demo.model.Product;
 import org.springframework.http.ResponseEntity;
@@ -53,11 +53,7 @@ public class Catalog {
         for (Map.Entry<Product, Integer> entry : catalog.entrySet()) {
             if (entry.getKey().getId() == productID) {
                 int currentAmount = entry.getValue();
-                if (amount >= currentAmount) {
-                    // If the requested amount is greater or equal to the current amount, remove the product
-                    catalog.remove(entry.getKey());
-                } else {
-                    // Otherwise, update the quantity
+                if (amount <= currentAmount) {
                     entry.setValue(currentAmount - amount);
                 }
                 break;
