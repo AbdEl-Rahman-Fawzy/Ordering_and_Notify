@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.service.Catalog;
 import com.example.demo.service.NotificationService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
