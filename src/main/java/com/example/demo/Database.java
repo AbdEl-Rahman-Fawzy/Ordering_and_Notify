@@ -17,6 +17,18 @@ public class Database {
     private static Map<Integer, Order> Orders = new HashMap<>();
     private static List<String> logs = new ArrayList<>();
 
+    public Database() {
+        Customer customer1 = new Customer("Hend", 19, 1, "ehend3343@gmail.com", 1000, "pa15oss",1);
+        Customer customer2 = new Customer("Ali", 20, 2, "aa56@mail.com", 2000, "lkk8511",2);
+        Customer customer3 = new Customer("Omar", 21, 3, "oa78@mail.com", 3000, "mbgg2514",3);
+        Customer customer4 = new Customer("Soha", 22, 4, "skk69@mail.com", 4000, "kill8511",4);
+        customers.put(customer1.getId(), customer1);
+        customers.put(customer2.getId(), customer2);
+        customers.put(customer3.getId(), customer3);
+        customers.put(customer4.getId(), customer4);
+    }
+
+
     // Methods for Customer operations
     public static void addCustomer(Customer customer) {
         customer.getCart().setID(generate_hash());
@@ -118,7 +130,7 @@ public class Database {
         System.out.println();
     }
 
-    private static int generate_hash() {
+    public static int generate_hash() {
         Random random = new Random();
         int input=random.nextInt(0,50000);
         try {

@@ -1,16 +1,32 @@
 package com.example.demo.model;
 
+import com.example.demo.service.NotificationService;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Customer {
 	private String name;
+	private String password;
 	private int age;
 	private int id;
-	private Queue<notification> notifications = new LinkedList<>();
-	private Cart cart = new Cart();
+	private ArrayList<notification>notifications = new ArrayList<>();
+	private Cart cart ;
 	private String mail;
 	private double balance;
+
+	public Customer() {}
+
+	public Customer(String name, int age, int id, String mail, double balance, String password , int cart_id) {
+		this.name = name;
+		this.age = age;
+		this.id = id;
+		this.mail = mail;
+		this.balance = balance;
+		this.password = password;
+		cart = new Cart(cart_id);
+	}
 
 	public String getName() {
 		return name;
@@ -45,10 +61,9 @@ public class Customer {
 	}
 
 
-	public Queue<notification> getNotifications() {
+	public ArrayList<notification> getNotifications() {
 		return notifications;
 	}
-
 
 	public void setAge(int i) {
 		this.age= i;
@@ -58,7 +73,19 @@ public class Customer {
 		return balance;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
+
+	public void add_notification(notification n){
+		notifications.add(n);
+	}
+
 }

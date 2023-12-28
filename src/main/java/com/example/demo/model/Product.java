@@ -8,6 +8,7 @@ public class Product {
     private String vendor;
     private String category;
     private double price;
+    private int amount;
 
     // Constructors
     public Product() {
@@ -71,8 +72,13 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
+    public int getAmount() {
+        return amount;
+    }
 
-    // Additional methods if needed
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
     @Override
     public String toString() {
@@ -85,8 +91,4 @@ public class Product {
                 ", price=" + price +
                 '}';
     }
-
-
-
-    // You can add other methods or functionality as needed
 }

@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.Database;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +13,9 @@ public class Cart {
     private List<Product> items;
 
     // Constructors
-    public Cart() {
+    public Cart(int id ) {
         this.items = new ArrayList<>();
+        this.id = id;
     }
 
 
@@ -30,12 +33,15 @@ public class Cart {
         return false;
     }
 
-    // Methods
     public boolean addItem(Product x) {
-        items.add(x);
-        calc_total_cost();
-        return false;
+        if (x != null) {
+            items.add(x);
+            calc_total_cost();
+            return true; // Return true if the product was added successfully
+        }
+        return false; // Return false if the product is null
     }
+
 
     public boolean deleteItem(int id) {
         for (Product product : items) {
@@ -85,5 +91,8 @@ public class Cart {
             temp += x.getPrice();
         }
         total_cost = temp;
+    }
+    public List<Product> getItems() {
+        return items;
     }
 }
