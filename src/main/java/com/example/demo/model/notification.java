@@ -12,6 +12,7 @@ public class notification
         this.type = type;
         notify_user_id=customerID;
     }
+    public notification() {}
 
     public String getContent() {
         return content;

@@ -5,12 +5,12 @@ import com.example.demo.model.*;
 
 public class NotificationService {
     public void notify_failure_order(int userID) {
-        Customer current=Database.getCustomer(userID);
+        Customer current= Database.getCustomer(userID);
         String content = "Dear: " +current.getName() +" you dont have enough balance to make this order \n your cart contains"
                 +current.getCart().getData();
-        notification notf=new notification(content, NotificationType.FAILURE,userID);
-        Database.addNotification(notf);
+        notification notf = new notification(content, NotificationType.FAILURE,userID);
         current.add_notification(notf);
+        Database.addNotification(notf);
     }
 
     public void notify_order_data(int userID, int orderID) {
@@ -20,8 +20,9 @@ public class NotificationService {
                 +"order data is \n"
                 + current.getCart().getData();
         notification notf = new notification(content, NotificationType.INFORMATION,userID);
-        Database.addNotification(notf);
+        notf.setContent(content);
         current.add_notification(notf);
+        Database.addNotification(notf);
     }
 
     public void notify_success_order(int userID, int orderID) {

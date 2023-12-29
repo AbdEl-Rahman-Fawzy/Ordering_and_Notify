@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.Database;
-import com.example.demo.model.*;
 import com.example.demo.model.Catalog;
+import com.example.demo.model.Customer;
+import com.example.demo.model.Order;
+import com.example.demo.model.Product;
 import com.example.demo.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,11 +12,50 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @RestController
-@RequestMapping("/orders")
-public class OrderController {
+public class ApplicationController {
     private final OrderService orderService = new OrderService();
+    // add a new customer (in case of sign up use case)
+    // added in JSON format
+    @PostMapping(value = "/add")
+    public ResponseEntity<String> addCustomer(@RequestBody Customer customer) {
+        try {
+            Database.addCustomer(customer);
+            System.out.println(customer.getId());
+            return ResponseEntity.ok("Customer added Successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to add Customer" + e.getMessage());
+        }
+    }
+
+    // Retrieve customer data by id
+    @GetMapping("/get/{customerId}")
+    public ResponseEntity<Customer> getCustomerById(@PathVariable int customerId) {
+        Customer customer = Database.getCustomer(customerId);
+        if (customer == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        else {
+            return new ResponseEntity<>(customer, HttpStatus.OK);
+        }
+    }
+    // Customer login with id and password
+    @GetMapping(value = "/login/{customerID}/{password}")
+    public ResponseEntity<Customer> login(@PathVariable int customerID, @PathVariable String password) {
+        Customer customer = Database.getCustomer(customerID);
+        if (customer == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        else {
+            if (customer.getPassword().equals(password)) {
+                Database.displayCustomers();
+                return new ResponseEntity<>(customer, HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+    }
     // Endpoint to display the catalog products
     @GetMapping("/products")
     public ResponseEntity displayCatalogProducts() {
@@ -59,6 +100,10 @@ public class OrderController {
             boolean orderPlaced = orderService.makeSimple(customerID);
 
             if (orderPlaced) {
+                // print the notification list of the customer
+                if(customer.getNotifications() == null) {
+                    System.out.println("No notifications");
+                }
                 return ResponseEntity.ok("Simple order placed successfully");
             }
             else {

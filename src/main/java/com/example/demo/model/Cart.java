@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.Database;
-
 import java.util.ArrayList;
 import java.util.List;
 

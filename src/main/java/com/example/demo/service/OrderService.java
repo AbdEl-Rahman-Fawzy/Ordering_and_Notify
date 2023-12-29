@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.Catalog;
 import com.example.demo.Database;
 import com.example.demo.model.*;
 
@@ -27,10 +26,10 @@ public class OrderService {
                 }
                 String currentDate = getCurrentDate();
                 Order new_ord = new SimpleOrder(current.getId(),currentDate,x);
+                Database.addOrder(new_ord);
                 current.setBalance(current.getBalance() - new_ord.getTotalCost());
                 n.notify_order_data(user_id,new_ord.getID());
                 n.notify_success_order(user_id,new_ord.getID());
-                Database.addOrder(new_ord);
                 x.clear();
             }
         }
