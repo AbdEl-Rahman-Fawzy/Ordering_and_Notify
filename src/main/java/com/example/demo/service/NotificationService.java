@@ -11,6 +11,7 @@ public class NotificationService {
         notification notf=new notification(content, NotificationType.FAILURE,userID);
         Database.addNotification(notf);
         current.add_notification(notf);
+        current.add_notification(notf);
     }
 
     public void notify_order_data(int userID, int orderID) {

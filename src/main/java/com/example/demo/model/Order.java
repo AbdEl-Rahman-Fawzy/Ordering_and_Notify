@@ -24,6 +24,7 @@ public abstract class Order {
         order_owner = x;
         this.date = date;
         this.cart = cart;
+        totalCost= cart.getTotal_cost();
     }
 
     public double getTotalCost() {

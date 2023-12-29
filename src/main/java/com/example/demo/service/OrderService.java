@@ -21,18 +21,14 @@ public class OrderService {
                 n.notify_failure_order(user_id);
                 return true;
             } else {
-                if(current.getCart().isempty()){
-                    n.notify_emtpy_order(user_id);
-                    return true;
-                }
                 String currentDate = getCurrentDate();
                 Order new_ord = new SimpleOrder(current.getId(),currentDate,x);
                 current.setBalance(current.getBalance() - new_ord.getTotalCost());
                 n.notify_order_data(user_id,new_ord.getID());
                 n.notify_success_order(user_id,new_ord.getID());
-                Database.addOrder(new_ord);
                 x.clear();
             }
+            return false;
         }
         catch (Exception e){
             System.out.println("exception in make order as " + e.getMessage());
