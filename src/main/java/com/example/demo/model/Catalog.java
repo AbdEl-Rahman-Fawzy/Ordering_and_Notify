@@ -69,7 +69,7 @@ public class Catalog {
         catalog.entrySet().removeIf(entry -> entry.getKey().getId() == productID);
     }
 
-    public Map<Product, Integer> displayProducts() {
+    public static Map<Product, Integer> displayProducts() {
         return catalog;
     }
     public static Product getProductByID(int productID){

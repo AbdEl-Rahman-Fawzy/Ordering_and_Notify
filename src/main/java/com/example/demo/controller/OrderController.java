@@ -18,10 +18,9 @@ public class OrderController {
     // Endpoint to display the catalog products
     @GetMapping("/products")
     public ResponseEntity displayCatalogProducts() {
-        Catalog catalog = new Catalog();
-        if (catalog.displayProducts().isEmpty())
+        if (Catalog.displayProducts().isEmpty())
             return ResponseEntity.badRequest().body("Catalog is empty");
-        return ResponseEntity.ok(catalog.displayProducts());
+        return ResponseEntity.ok(Catalog.displayProducts());
     }
 
     // Endpoint to add products to cart and place a simple order
