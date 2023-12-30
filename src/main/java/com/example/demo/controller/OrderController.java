@@ -24,7 +24,7 @@ public class OrderController {
     }
 
     // Endpoint to add products to cart and place a simple order
-    @PostMapping(value = "simpleOrder/{customerID}")
+    @PostMapping(value = "/simpleOrder/{customerID}")
     public ResponseEntity<String> makeSimpleOrder(
             @RequestBody List<Product> productInfoList,
             @PathVariable int customerID
@@ -69,28 +69,19 @@ public class OrderController {
     }
 
     // Endpoint to add products to cart and place a compound order
-    @PostMapping(value = "compoundOrder")
+    @PostMapping(value = "/compoundOrder")
     public ResponseEntity<String> makeCompoundOrder(
-            @RequestBody List<Order> orders
-    ) {
+            @RequestBody List<Order> orders)
+    {
         List<Integer> customerIDs = new ArrayList<>();
         // Check if the customer exists
         for (Order order : orders) {
             int customerID = order.getOrder_owner();
             Customer customer = Database.getCustomer(customerID);
             if (customer == null) {
-                customerIDs.add(customerID);
                 return ResponseEntity.badRequest().body("Customer with ID: " + customerID + " not found");
             }
-        }
-        // Check if the cart belongs to the customer
-        for (Order order : orders) {
-            int customerID = order.getOrder_owner();
-            int cartID = order.getCart().getId();
-            Customer customer = Database.getCustomer(customerID);
-            if (customer.getCart().getId() != cartID) {
-                return ResponseEntity.badRequest().body("Cart with ID: " + cartID + " doesn't belong to the customer with ID: " + customerID);
-            }
+            customerIDs.add(customerID);
         }
         // check if each product exists in the catalog
         for (Order order : orders) {

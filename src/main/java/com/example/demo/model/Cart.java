@@ -11,11 +11,11 @@ public class Cart {
     private List<Product> items;
 
     // Constructors
+    public Cart() {}
     public Cart(int id ) {
         this.items = new ArrayList<>();
         this.id = id;
     }
-
 
 
     public String getState() {
@@ -92,5 +92,9 @@ public class Cart {
     }
     public List<Product> getItems() {
         return items;
+    }
+
+    public void setItems(List<Product> items) {
+        this.items = items;
     }
 }

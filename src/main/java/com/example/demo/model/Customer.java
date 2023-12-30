@@ -88,4 +88,7 @@ public class Customer {
 		notifications.add(n);
 	}
 
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 }
