@@ -15,8 +15,11 @@ public class Customer {
 	private Cart cart ;
 	private String mail;
 	private double balance;
+	boolean logged_in = false;
 
-	public Customer() {}
+	public Customer() {
+		this.logged_in = false;
+	}
 
 	public Customer(String name, int age, int id, String mail, double balance, String password , int cart_id) {
 		this.name = name;
@@ -90,5 +93,11 @@ public class Customer {
 
 	public void setCart(Cart cart) {
 		this.cart = cart;
+	}
+	public void setLogged_in(boolean logged_in) {
+		this.logged_in = logged_in;
+	}
+	public boolean isLogged_in() {
+		return logged_in;
 	}
 }

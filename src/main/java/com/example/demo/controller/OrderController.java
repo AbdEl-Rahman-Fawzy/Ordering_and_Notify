@@ -35,7 +35,9 @@ public class OrderController {
             if (customer == null) {
                 return ResponseEntity.badRequest().body("Customer not found");
             }
-
+            if(!customer.isLogged_in()) {
+                return ResponseEntity.badRequest().body("Customer not logged in");
+            }
             // Check if the cart belongs to the customer
             if (customer.getCart().getId() != customer.getCart().getId()) {
                 return ResponseEntity.badRequest().body("Cart doesn't belong to the customer");
