@@ -30,7 +30,7 @@ public class OrderService {
                 current.setBalance(current.getBalance() - new_ord.getTotalCost());
                 n.notify_order_data(user_id,new_ord.getID());
                 n.notify_success_order(user_id,new_ord.getID());
-                x.clear();
+//                x.clear();
             }
         }
         catch (Exception e){
@@ -95,5 +95,20 @@ public class OrderService {
     public void clearCart(int user_id) {
         Customer x = Database.getCustomer(user_id);
         x.getCart().clear();
+    }
+
+    public void cancelOrder(int user_id) {
+        Customer x = Database.getCustomer(user_id);
+        Cart cart = x.getCart();
+        for(Product p : cart.getItems()){
+            Catalog.add_item(p,p.getAmount());
+        }
+        x.setBalance(x.getBalance() + cart.getTotal_cost());
+        // get the order object
+        Order last_order = Database.getOrder(x.getCart().getId());
+        // remove the order from the database
+        n.notify_cancel_order(user_id,last_order.getID());
+        Database.removeOrder(x.getCart().getId());
+        cart.clear();
     }
 }

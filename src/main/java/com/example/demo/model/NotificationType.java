@@ -5,4 +5,5 @@ public enum NotificationType {
     SUCCESS,
     FAILURE,
     INFORMATION,
+    CANCEL
 }

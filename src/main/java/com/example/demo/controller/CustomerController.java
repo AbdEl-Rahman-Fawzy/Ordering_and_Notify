@@ -16,7 +16,6 @@ public class CustomerController {
     public ResponseEntity<String> addCustomer(@RequestBody Customer customer) {
         try {
             Database.addCustomer(customer);
-            System.out.println(customer.getId());
             return ResponseEntity.ok("Customer added Successfully");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Failed to add Customer" + e.getMessage());

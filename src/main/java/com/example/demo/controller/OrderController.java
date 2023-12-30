@@ -109,4 +109,33 @@ public class OrderController {
             return ResponseEntity.badRequest().body("Failed to place the order");
         }
     }
+    
+    // Endpoint to cancel an order
+    @DeleteMapping(value = "/cancelOrder/{customerID}")
+    public ResponseEntity<String> cancelOrder(
+            @PathVariable int customerID
+    ) {
+        try {
+            // check if the customer exists and logged in
+            Customer customer = Database.getCustomer(customerID);
+            System.out.println(customerID);
+            if (customer == null) {
+                return ResponseEntity.badRequest().body("Customer not found");
+            }
+            if (!customer.isLogged_in()) {
+                return ResponseEntity.badRequest().body("Customer not logged in");
+            }
+            // check if the order exists
+            Order order = Database.getOrder(customer.getCart().getId());
+            if (order == null) {
+                return ResponseEntity.badRequest().body("Order not found");
+            }
+            // delete the order
+            orderService.cancelOrder(customerID);
+            return ResponseEntity.ok("Order cancelled successfully");
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
+        }
+    }
 }
