@@ -30,7 +30,7 @@ public class OrderController {
     }
 
     // Endpoint to add products to cart and place a simple order
-    @PostMapping(value = "/simpleOrder/{customerID}/{placementDate}")
+    @PostMapping(value ="/simpleOrder/{customerID}/{placementDate}")
     public ResponseEntity<String> makeSimpleOrder(
             @RequestBody List<Product> productInfoList,
             @PathVariable int customerID,

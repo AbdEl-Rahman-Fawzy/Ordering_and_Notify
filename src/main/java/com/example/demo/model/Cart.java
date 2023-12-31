@@ -11,7 +11,9 @@ public class Cart {
     private List<Product> items;
 
     // Constructors
-    public Cart() {}
+    public Cart() {
+        this.items = new ArrayList<>();
+    }
     public Cart(int id ) {
         this.items = new ArrayList<>();
         this.id = id;
