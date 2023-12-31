@@ -3,13 +3,14 @@ package com.example.demo.service;
 import com.example.demo.Database;
 import com.example.demo.model.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class OrderService {
     NotificationService n = new NotificationService();
-    public boolean makeSimple(int user_id){
+    public boolean makeSimple(int user_id, LocalDate placementDate) {
         try {
             if (Database.getCustomer(user_id) == null) {
                 return false;
@@ -21,11 +22,10 @@ public class OrderService {
                 return true;
             } else {
                 if(current.getCart().isempty()){
-                    n.notify_emtpy_order(user_id);
+                    n.notify_empty_order(user_id);
                     return true;
                 }
-                String currentDate = getCurrentDate();
-                Order new_ord = new SimpleOrder(current.getId(),currentDate,x);
+                Order new_ord = new SimpleOrder(current.getId(),placementDate,x);
                 Database.addOrder(new_ord);
                 current.setBalance(current.getBalance() - new_ord.getTotalCost());
                 n.notify_order_data(user_id,new_ord.getID());
@@ -39,10 +39,10 @@ public class OrderService {
         return true;
     }
 
-    public boolean compoundOrder(List<Integer> IDs){
+    public boolean compoundOrder(List<Integer> IDs, LocalDate placementDate) {
         try {
             for(int i : IDs){
-                makeSimple(i);
+                makeSimple(i, placementDate);
             }
         }
         catch (Exception e){
@@ -56,6 +56,7 @@ public class OrderService {
         Product prod = Catalog.getProductByID(productID);
 
         if (prod != null) {
+            prod.setAmount(amount);
             boolean addedToCart = current.getCart().addItem(prod);
 
             if (addedToCart) {
@@ -97,18 +98,29 @@ public class OrderService {
         x.getCart().clear();
     }
 
-    public void cancelOrder(int user_id) {
+    public boolean cancelOrder(int user_id, int orderID, LocalDate currentDate) {
+        Order order = Database.getOrder(orderID);
+        if (order == null) {
+            return false;
+        }
+        // if the order date minus the current date is more than 2 days
+        // then the order can't be cancelled
+        LocalDate orderDate = order.getDate();
+        if (orderDate.isBefore(currentDate.minusDays(2))) {
+            return false;
+        }
         Customer x = Database.getCustomer(user_id);
-        Cart cart = x.getCart();
+        Cart cart = order.getCart();
         for(Product p : cart.getItems()){
-            Catalog.add_item(p,p.getAmount());
+            Catalog.add_item(p, p.getAmount());
         }
         x.setBalance(x.getBalance() + cart.getTotal_cost());
         // get the order object
-        Order last_order = Database.getOrder(x.getCart().getId());
+        Order last_order = Database.getOrder(orderID);
         // remove the order from the database
         n.notify_cancel_order(user_id,last_order.getID());
-        Database.removeOrder(x.getCart().getId());
         cart.clear();
+        Database.removeOrder(x.getCart().getId());
+        return true;
     }
 }

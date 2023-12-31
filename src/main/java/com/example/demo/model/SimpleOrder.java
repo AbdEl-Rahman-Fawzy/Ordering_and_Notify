@@ -3,6 +3,8 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.time.LocalDate;
+
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -13,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = CompoundOrder.class, name = "compound")
 })
 public class SimpleOrder extends Order {
-    public SimpleOrder(int x , String date, Cart cart) {
+    public SimpleOrder(int x , LocalDate date, Cart cart) {
         super(x, date, cart);
     }
 

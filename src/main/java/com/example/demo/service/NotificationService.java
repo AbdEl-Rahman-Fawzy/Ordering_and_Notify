@@ -16,9 +16,14 @@ public class NotificationService {
     public void notify_order_data(int userID, int orderID) {
         Customer current=Database.getCustomer(userID);
         Order ord=Database.getOrder(orderID);
-        String content = "Dear: " + current.getName() +" your order ID is " + ord.getID()
-                +"order data is \n"
-                + current.getCart().getData();
+        String content = "Dear: " + current.getName() +", your order ID is " + ord.getID() + "\n"
+                + "order data is: " + "\n"
+                + current.getCart().getData() + "\n"
+                + "your remaining balance : " + current.getBalance() + "\n"
+                + "Your order now is on SHIPPING state " + "\n"
+                + "You can cancel your order within 2 DAYS from now "
+                + "Current date: " + ord.getDate();
+
         notification notf = new notification(content, NotificationType.INFORMATION,userID);
         notf.setContent(content);
         current.add_notification(notf);
@@ -29,7 +34,8 @@ public class NotificationService {
         Customer current=Database.getCustomer(userID);
         Order ord=Database.getOrder(orderID);
         String content = "Dear: " +current.getName() +" your order ID is " + ord.getID()
-                +"order data is \n"
+                + "Your order has been DELIVERED successfully on " + ord.getDate()
+                +"\n order data is "
                 + current.getCart().getData()
                 + "\n your remaining balance :" + current.getBalance();
         notification notf=new notification(content, NotificationType.SUCCESS,userID);
@@ -37,7 +43,7 @@ public class NotificationService {
         current.add_notification(notf);
     }
 
-    public void notify_emtpy_order(int userID) {
+    public void notify_empty_order(int userID) {
         Customer current=Database.getCustomer(userID);
         String content = "Dear: " +current.getName() +" the cart is empty";
 
@@ -52,7 +58,7 @@ public class NotificationService {
                 +" order data is \n"
                 + current.getCart().getData() + " is Cancelled"
                 + "\n your remaining balance :" + current.getBalance();
-        notification notf=new notification(content, NotificationType.CANCEL,userID);
+        notification notf = new notification(content, NotificationType.CANCEL,userID);
         Database.addNotification(notf);
         current.add_notification(notf);
     }
