@@ -10,6 +10,7 @@ public class NotificationService {
                 +current.getCart().getData();
         notification notf = new notification(content, NotificationType.FAILURE,userID);
         current.add_notification(notf);
+        Database.addToQueue(notf);
         Database.addNotification(notf);
     }
 
@@ -27,6 +28,7 @@ public class NotificationService {
         notification notf = new notification(content, NotificationType.INFORMATION,userID);
         notf.setContent(content);
         current.add_notification(notf);
+        Database.addToQueue(notf);
         Database.addNotification(notf);
     }
 
@@ -40,6 +42,7 @@ public class NotificationService {
                 + "\n your remaining balance :" + current.getBalance();
         notification notf=new notification(content, NotificationType.SUCCESS,userID);
         Database.addNotification(notf);
+        Database.addToQueue(notf);
         current.add_notification(notf);
     }
 
@@ -49,6 +52,7 @@ public class NotificationService {
 
         notification notf=new notification(content, NotificationType.FAILURE,userID);
         Database.addNotification(notf);
+        Database.addToQueue(notf);
         current.add_notification(notf);
     }
     public void notify_cancel_order(int userID, int orderID) {
@@ -60,6 +64,7 @@ public class NotificationService {
                 + "\n your remaining balance :" + current.getBalance();
         notification notf = new notification(content, NotificationType.CANCEL,userID);
         Database.addNotification(notf);
+        Database.addToQueue(notf);
         current.add_notification(notf);
     }
 }

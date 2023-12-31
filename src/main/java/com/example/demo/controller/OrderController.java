@@ -23,7 +23,9 @@ public class OrderController {
     @GetMapping("/products")
     public ResponseEntity displayCatalogProducts() {
         if (Catalog.displayProducts().isEmpty())
+        {
             return ResponseEntity.badRequest().body("Catalog is empty");
+        }
         return ResponseEntity.ok(Catalog.displayProducts());
     }
 

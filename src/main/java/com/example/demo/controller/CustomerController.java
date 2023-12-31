@@ -42,7 +42,6 @@ public class CustomerController {
         }
         else {
             if (customer.getPassword().equals(password)) {
-                Database.displayCustomers();
                 customer.setLogged_in(true);
                 return new ResponseEntity<>(customer, HttpStatus.OK);
             }
