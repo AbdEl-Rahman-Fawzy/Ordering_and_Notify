@@ -3,6 +3,8 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.time.LocalDate;
+
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -14,17 +16,19 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 
 public abstract class Order {
-    private String date;
+    private LocalDate date;
+    private LocalDate cancelDate;
     private double totalCost;
     private Cart cart;
     private int ID;
     private int order_owner;
 
-    public Order(int x ,String date, Cart cart) {
+
+    public Order(int x ,LocalDate date, Cart cart) {
         order_owner = x;
         this.date = date;
         this.cart = cart;
-        totalCost= cart.getTotal_cost();
+        totalCost = cart.getTotal_cost();
     }
 
     public double getTotalCost() {
@@ -56,7 +60,7 @@ public abstract class Order {
     }
     public double getTotalCost (int x){
         return totalCost;
-    }public String getDate(){
+    }public LocalDate getDate(){
         return date;
     }
 
@@ -66,6 +70,19 @@ public abstract class Order {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+    public LocalDate getPlacementDate(){
+        return date;
+    }
+    public LocalDate getCancelDate(){
+        return cancelDate;
+    }
+    public void setCancelDate(LocalDate cancelDate){
+        this.cancelDate = cancelDate;
     }
 }
 

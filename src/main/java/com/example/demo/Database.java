@@ -1,14 +1,11 @@
 package com.example.demo;
 
 import com.example.demo.model.*;
-import java.util.Random;
+
+import java.util.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Database {
     public static Map<Integer, Customer> customers = new HashMap<>();
@@ -16,6 +13,7 @@ public class Database {
     private static Map<Integer, Product> products = new HashMap<>();
     private static Map<Integer, Order> Orders = new HashMap<>();
     private static List<String> logs = new ArrayList<>();
+    private static Queue<notification> notificationQueue = new ArrayDeque<>();
 
     public Database() {
         Customer customer1 = new Customer("Hend", 19, 1, "ehend3343@gmail.com", 1000, "pa15oss",1);
@@ -149,5 +147,11 @@ public class Database {
             e.printStackTrace();
             return 0; // or throw an exception, depending on your requirements
         }
+    }
+    public static void addToQueue(notification n) {
+        notificationQueue.add(n);
+    }
+    public static Queue<notification> getNotificationQueue() {
+        return notificationQueue;
     }
 }

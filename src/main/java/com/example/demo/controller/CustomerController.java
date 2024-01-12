@@ -13,15 +13,15 @@ public class CustomerController {
     // add a new customer (in case of sign up use case)
     // added in JSON format
     @PostMapping(value = "/add")
-    public ResponseEntity<String> addCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         try {
             Database.addCustomer(customer);
-            System.out.println(customer.getId());
-            return ResponseEntity.ok("Customer added Successfully");
+            return ResponseEntity.ok().body(customer); // Return the created Customer object
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed to add Customer" + e.getMessage());
+            return ResponseEntity.badRequest().body(null); // Return null if the customer is null
         }
     }
+
 
     // Retrieve customer data by id
     @GetMapping("/get/{customerId}")
@@ -43,7 +43,7 @@ public class CustomerController {
         }
         else {
             if (customer.getPassword().equals(password)) {
-                Database.displayCustomers();
+                customer.setLogged_in(true);
                 return new ResponseEntity<>(customer, HttpStatus.OK);
             }
             else {

@@ -3,6 +3,7 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @JsonTypeInfo(
@@ -18,7 +19,7 @@ import java.util.List;
 public class CompoundOrder extends Order {
     private List<SimpleOrder> orders;
 
-    public CompoundOrder(int x , String date, Cart cart, List<SimpleOrder> orders) {
+    public CompoundOrder(int x , LocalDate date, Cart cart, List<SimpleOrder> orders) {
         super(x, date, cart);
         this.orders = orders;
     }
