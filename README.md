@@ -20,6 +20,6 @@ This project focuses on creating a powerful "Orders and Notifications Management
 7. Cancel Order
 
 ## UML System Class Diagram
-[UML Class Diagram]([Project Description PDF](https://drive.google.com/file/d/1DwuD5kcEj_TGxaB5WJxneq7RnPDI9vMC/view?usp=sharing)
+[UML Class Diagram](https://drive.google.com/file/d/1DwuD5kcEj_TGxaB5WJxneq7RnPDI9vMC/view?usp=sharing)
 
 
