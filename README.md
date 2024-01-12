@@ -1,4 +1,4 @@
-# Orders and Notifications Management
+# Orders and Notifications Management API
 ## Overview 
 This project focuses on creating a powerful "Orders and Notifications Management" module for an efficient e-commerce system. The system provides essential features, including product listing, customer account management, order placement, shipping, and notification handling.
 
