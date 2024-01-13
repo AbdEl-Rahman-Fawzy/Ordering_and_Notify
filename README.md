@@ -19,7 +19,7 @@ This project focuses on creating a powerful "Orders and Notifications Management
 6. Show Customer Notifications
 7. Cancel Order
 
-## Detalied Project Description
+## Detailed Project Description
 [Project Description](https://github.com/AbdEl-Rahman-Fawzy/Ordering_and_Notify/blob/master/Project%20Requirements%20Description.pdf)
 
 ## UML System Class Diagram
