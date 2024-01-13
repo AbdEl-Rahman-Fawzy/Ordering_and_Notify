@@ -36,6 +36,14 @@ Make sure you have the following dependencies installed:
 The following Software Requirements Specification includes:
 1. Exact mapping between every single requirement and its corresponding web service API operation
 2- Design Patterns used and corresponding classes.
+
 [API Mapping](https://github.com/AbdEl-Rahman-Fawzy/Ordering_and_Notify/blob/master/SDS.pdf)
 
+## Contributing 
+Contributions to this API project are welcomed. Feel free to fork the repository and create pull requests for improvements or additional features.
 
+## Contributers
+Orders and Notifications API project is developed with contributions from the following team members working with Agile SDLC method:
+- [Hend Ahmad](https://github.com/LifelongLearner-HEND)
+- [Abd-El Rahman Fawzy](https://github.com/AbdEl-Rahman-Fawzy)
+- [Hazem Nasser](https://github.com/hazemnasser1)
