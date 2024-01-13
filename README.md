@@ -34,7 +34,7 @@ Make sure you have the following dependencies installed:
 
 ## How to use Orders and Notifications API
 The following Software Requirements Specification includes:
-1. Exact mapping between every single requirement and its corresponding web service API operation
+1. Exact mapping between every single requirement and its corresponding web service API operation.
 2- Design Patterns used and corresponding classes.
 
 [API Mapping](https://github.com/AbdEl-Rahman-Fawzy/Ordering_and_Notify/blob/master/SDS.pdf)
@@ -42,6 +42,10 @@ The following Software Requirements Specification includes:
 ## Contributing 
 Contributions to this API project are welcomed. Feel free to fork the repository and create pull requests for improvements or additional features.
 
+## Languages and Frameworks
+- Java
+- Spring Boot
+  
 ## Contributers
 Orders and Notifications API project is developed with contributions from the following team members working with Agile SDLC method:
 - [Hend Ahmad](https://github.com/LifelongLearner-HEND)
