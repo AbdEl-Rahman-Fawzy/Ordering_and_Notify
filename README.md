@@ -32,4 +32,10 @@ Make sure you have the following dependencies installed:
 3. Postman Testing tool to import the prepared postman collection and testing the API
 4. Maven for your systmen environment
 
+## How to use Orders and Notifications API
+The following Software Requirements Specification includes:
+1. Exact mapping between every single requirement and its corresponding web service API operation
+2- Design Patterns used and corresponding classes.
+[API Mapping](https://github.com/AbdEl-Rahman-Fawzy/Ordering_and_Notify/blob/master/SDS.pdf)
+
 
