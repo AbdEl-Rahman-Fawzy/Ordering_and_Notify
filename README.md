@@ -19,7 +19,17 @@ This project focuses on creating a powerful "Orders and Notifications Management
 6. Show Customer Notifications
 7. Cancel Order
 
+## Detalied Project Description
+
+
 ## UML System Class Diagram
 [UML Class Diagram](https://drive.google.com/file/d/1DwuD5kcEj_TGxaB5WJxneq7RnPDI9vMC/view?usp=sharing)
+
+## Dependencies
+Make sure you have the following dependencies installed:
+1. Java 17
+2. SDK 17
+3. Postman Testing tool to import the prepared postman collection and testing the API
+4. Maven for your systmen environment
 
 
